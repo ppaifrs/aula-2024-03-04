@@ -1,6 +1,6 @@
 package br.edu.ifrs.riogrande.entity;
 
-public class Servidor extends Usuario {
+public /* concrete */ class Servidor extends Usuario {
 
   public enum Perfil {
     SECRETARIA, COORDENACAO

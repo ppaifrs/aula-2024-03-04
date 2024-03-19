@@ -1,17 +1,21 @@
 -- Single Table Inheritance, lidar com os nulos
 CREATE TABLE usuarios (
-  email         VARCHAR(100),
+  tipo          VARCHAR(50), -- aluno, servidor
+  -- usuario
+  email         VARCHAR(100) PRIMARY KEY,
   senha         TEXT,
+  cpf           VARCHAR(11),
+  -- aluno
   matricula     VARCHAR(10),
   data_ingresso DATE,
+  -- servidor
   siape         INTEGER,
-  perfil        VARCHAR(20),
-  tipo          VARCHAR(50) -- ALUNO, SERVIDOR
+  perfil        VARCHAR(20)
 );
 
 CREATE INDEX IF NOT EXISTS ON usuarios (tipo);
 
--- Class Table Inheritance
+-- Class Table Inheritance (Tabler per Class)
 CREATE TABLE usuarios (
   email         VARCHAR(100) PRIMARY KEY,
   senha         TEXT
@@ -36,15 +40,15 @@ WHERE s.siape = 112344;
 -- Table per Concrete Class (Concrete Table Inheritance)
 -- Tabela por Classe Concreta
 CREATE TABLE alunos ( -- classe Aluno é concreta
-  email         VARCHAR(100),
+  email         VARCHAR(100) PRIMARY KEY,
   senha         TEXT,
-  matricula     VARCHAR(10),
+  matricula     VARCHAR(10) UNIQUE, -- chave candidata
   data_ingresso DATE
 );
 
 CREATE TABLE servidores ( -- classe Servidor é concreta
-  email         VARCHAR(100),
+  email         VARCHAR(100) PRIMARY KEY,
   senha         TEXT,
-  siape         INTEGER,
+  siape         INTEGER UNIQUE -- chave candidata,
   perfil        VARCHAR(20)
 );
